@@ -3,8 +3,8 @@ import { Movie } from '../types'
 const MovieCard = ({movie}: {movie: Movie}) => {
   return (
     <li className='movie-card'>
-      <img src={movie.Poster} alt={movie.Title} />
-      <h3>{movie.Title} - {movie.Year}</h3>
+      <img src={movie.poster} alt={movie.title} />
+      <h3>{movie.title} - {movie.year}</h3>
     </li>
   )
 }

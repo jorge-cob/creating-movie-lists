@@ -1,7 +1,7 @@
-export type Movie = {
-  Title: string
-  Year: string
-  imdbID: string
-  Type: string
-  Poster: string
+export interface Movie {
+	title:  string;
+	year:   string;
+	id: string;
+	type:   "movie" | "serie" | "episode";
+	poster: string;
 }

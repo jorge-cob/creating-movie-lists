@@ -6,7 +6,7 @@ const MovieList = ({movies = []} : {movies: Movie[]}) => {
     <>
       <ul className='item-list'>
         {
-          movies.map((movie) => <MovieCard key={movie.imdbID} movie={movie} />)
+          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         }
       </ul>
     </>

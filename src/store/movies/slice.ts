@@ -5,12 +5,12 @@ const DEFAULT_STATE: Movie[] = [];
 export type MovieId = string;
 
 export interface Movie {
-  id: string;
-	name: string;
-	email: string;
-	github: string;
+	Title:  string;
+	Year:   string;
+	imdbID: string;
+	Type:   "movie" | "serie" | "episode";
+	Poster: string;
 }
-
 
 
 const initialState: Movie[] = (() => {

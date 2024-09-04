@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.movie-card {
+  width: 30vw
+}
+
+.item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  gap: 24px;
+}
+

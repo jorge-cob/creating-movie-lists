@@ -3,6 +3,8 @@ import { getMovies } from '../service/movies'
 import { Movie } from '../types'
 import MovieList from '../components/MovieList'
 import {Pagination} from "@nextui-org/pagination"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 function Home() {
   const [searchText, setSearchText] = useState('')
@@ -33,12 +35,28 @@ function Home() {
 
   return (
     <>
-      <main>
-        <article>
-          <form onSubmit={handleSubmit}>
-            <input type="text" value={searchText} onChange={handleSearchChange} />
-            <button type="submit">Search</button>
+      <nav className="navbar">
+        <div className="search-box">
+        <div id="topsearch-ac">
+          <form className="top-search-form" onSubmit={handleSubmit}>
+            <div className="easy-autocomplete">
+              <input
+                className="top-search-input"
+                type="text" value={searchText} onChange={handleSearchChange}
+                onKeyDown={(e) => e.key === "Enter" ?? handleSubmit}  
+              />
+            </div>
+            {/* <button type="submit">Search</button> */}
           </form>
+          {searchText.length > 0 && <FontAwesomeIcon icon={faXmark} className='clear-search' onClick={() => setSearchText('')} /> }
+
+         </div>
+        </div>
+      </nav>
+      <div className="movie-list-container">
+        
+        <article>
+          
           <MovieList movies={movies}  />
           <div className="flex flex-col gap-5">
           <p className="text-small text-default-500">Selected Page: {currentPage}</p>
@@ -51,7 +69,7 @@ function Home() {
           />
           </div>
         </article>
-      </main>
+      </div>
       <footer>
         Footer
       </footer>

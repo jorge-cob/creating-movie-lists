@@ -5,3 +5,5 @@ export interface Movie {
 	type:   "movie" | "serie" | "episode";
 	poster: string;
 }
+
+export type MovieId = string;

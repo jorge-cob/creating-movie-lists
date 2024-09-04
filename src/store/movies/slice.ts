@@ -1,9 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { Movie } from "../../types";
+import { Movie, MovieId } from "../../types";
 
 const DEFAULT_STATE: Movie[] = [];
-
-export type MovieId = string;
 
 
 const initialState: Movie[] = (() => {

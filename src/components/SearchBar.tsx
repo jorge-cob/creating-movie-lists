@@ -2,18 +2,31 @@ import { useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useMoviesActions } from '../hooks/useMoviesActions';
 
-function SearchBar({onSubmitSearch}) {
-  const [searchText, setSearchText] = useState('')
+function SearchBar() {
 
+  const navigate = useNavigate();  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+  const { searchMovies } = useMoviesActions()
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value)
+    setSearchQuery(event.target.value)
   }
+
   
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    await onSubmitSearch();
+    event.preventDefault();
+    setSearchParams({ q: searchQuery });
+    navigate(`/movies?q=${encodeURIComponent(searchQuery)}&page=1`);
+    //await searchMovies({ searchText: searchQuery, page: 1 })
+  }
+
+
+  const resetSearchText = () => {
+    setSearchQuery('')
   }
 
   return (
@@ -23,17 +36,16 @@ function SearchBar({onSubmitSearch}) {
           <div className="easy-autocomplete">
             <input
               className="top-search-input"
-              type="text" value={searchText} onChange={handleSearchChange}
+              type="text" value={searchQuery} onChange={handleSearchChange}
               onKeyDown={(e) => e.key === "Enter" ?? handleSubmit}  
             />
           </div>
-          {/* <button type="submit">Search</button> */}
         </form>
-        {searchText.length > 0 && <FontAwesomeIcon icon={faXmark} className='clear-search' onClick={() => setSearchText('')} /> }
-
+        {searchQuery.length > 0 && <FontAwesomeIcon icon={faXmark} className='clear-search' onClick={resetSearchText} /> }
       </div>
     </div>
   )
 }
 
 export default SearchBar
+

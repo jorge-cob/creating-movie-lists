@@ -10,19 +10,34 @@ import { store } from './store'
 import { Provider } from 'react-redux'
 import Home from './routes/Home.tsx';
 import ErrorPage from './error-page.tsx';
+import Movies from './routes/Movies.tsx';
+import MyLists from './routes/MyLists.tsx';
 import MyList from './routes/MyList.tsx';
+
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Home />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "movies",
-    element: <MyList />,
-  },
-]);
+    children: [
+      {
+        path: '/mylists',
+        element: <MyLists />,
+        children: [
+          {
+            path: ':id',
+            element: <MyList />,
+          }
+        ]
+      },
+      {
+        path: '/movies',
+        element: <Movies />,
+      }
+    ]
+  }
+])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -1,5 +1,6 @@
-import { configureStore, type Middleware } from "@reduxjs/toolkit";
-import moviesReducer from "./movies/slice";
+import { combineSlices, configureStore, type Middleware } from "@reduxjs/toolkit"
+import moviesReducer from "./movies/slice"
+import movieListsReducer from "./movieLists/slice"
 
 const persistanceLocalStorageMiddleware: Middleware = (store) => (next) => (action) => {
 	next(action);
@@ -7,10 +8,14 @@ const persistanceLocalStorageMiddleware: Middleware = (store) => (next) => (acti
 };
 
 
+const rootReducer = combineSlices({
+	movieLists: movieListsReducer,
+	movies: moviesReducer,
+})
+
+
 export const store = configureStore({
-	reducer: {
-		movies: moviesReducer,
-	},
+	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(persistanceLocalStorageMiddleware),
 });
 

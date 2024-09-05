@@ -8,9 +8,8 @@ export const getMovies = async ({searchText = '', page = 1}) => {
   const response = await fetch(`${OMD_URI}&s=${searchText}&page=${page}`)
   const data = await response.json()
   const { totalResults, Search } = data;
-  console.log(Search);
-  
-  return { search: convertRequestResponseNamesToMovies(Search), totalResults }
+  const totalPages = Math.ceil(totalResults / 10)
+  return { search: convertRequestResponseNamesToMovies(Search), totalResults, totalPages, page }
 }
 
 

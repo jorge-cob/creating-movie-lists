@@ -1,18 +1,13 @@
-import { addNewMovie, deleteMovieById } from "../store/movies/slice";
-import { Movie, MovieId } from "../types";
+import { fetchMovies } from "../store/movies/slice";
 
 import { useAppDispatch } from "./store";
 
 export const useMoviesActions = () => {
 	const dispatch = useAppDispatch();
 
-	const addUser = (movie: Movie) => {
-		dispatch(addNewMovie(movie))
+	const searchMovies = ({ searchText = '', page = 1 } ) => {
+		dispatch(fetchMovies( { searchText, page } ));
 	}
 
-	const removeUser = (id: MovieId) => {
-		dispatch(deleteMovieById(id));
-	};
-
-	return { addUser, removeUser };
+	return { searchMovies };
 };

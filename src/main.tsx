@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -40,11 +39,9 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <NextUIProvider>
-        <RouterProvider router={router} /> 
-      </NextUIProvider>
-    </Provider>
-  </StrictMode>,
+  <Provider store={store}>
+    <NextUIProvider>
+      <RouterProvider router={router} /> 
+    </NextUIProvider>
+  </Provider>
 )

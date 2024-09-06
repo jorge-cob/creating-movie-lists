@@ -15,7 +15,6 @@ function Movies() {
 
 
   const handlePageChange = (page: number) => {
-    fetchData({ searchText: searchQuery, page: page })
     navigate(`/movies?q=${encodeURIComponent(searchQuery)}&page=${page}`)
   }
 

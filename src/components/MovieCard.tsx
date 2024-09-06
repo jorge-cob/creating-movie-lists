@@ -14,18 +14,14 @@ const MovieCard = ({movie}: {movie: Movie}) => {
         />
       </div>
       <div className='movie-card-text'>
-        <span style={{
-          backgroundColor: '#EDEBEC',
-          padding: '5px 10px',
-          fontWeight: 'bold'
-        }}>
-          <h2>{year}</h2>
-        </span>
-        <span style={{
-          padding: '5px 10px'
-        }}>
+        <span className='movie-title'>
           <h2>{title}</h2>
         </span>
+        <span className='movie-year'>
+          <h2>{year}</h2>
+        </span>
+        
+        
       </div>
     </div>
     

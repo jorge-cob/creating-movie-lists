@@ -4,7 +4,6 @@ import {Pagination} from "@nextui-org/pagination"
 import { useAppSelector } from '../hooks/store'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useMoviesActions } from '../hooks/useMoviesActions'
-import { Spinner } from '@nextui-org/react'
 
 function Movies() {
   const navigate = useNavigate();  
@@ -30,13 +29,11 @@ function Movies() {
     }
   }, [searchQuery, searchPage])
 
-
+  console.log('searchPage', searchPage);
 
   return (
     <div className="movie-list-container">
-      <article>  
-        {!loading && <MovieList movies={search}  />}
-        {loading && <Spinner label="Loading..." color="warning" size='lg' />}
+        <MovieList movies={search} loading={loading} />
         <div className="flex flex-col gap-5">
         <Pagination
           total={totalPages}
@@ -45,7 +42,6 @@ function Movies() {
           onChange={handlePageChange}
         />
         </div>
-      </article>
     </div>
   )
 }

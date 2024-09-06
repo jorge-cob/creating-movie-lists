@@ -1,14 +1,12 @@
-import { useState } from 'react'
+import {  useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function SearchBar() {
-
   const navigate = useNavigate();  
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
   }
@@ -17,9 +15,7 @@ function SearchBar() {
     event.preventDefault();
     setSearchParams({ q: searchQuery });
     navigate(`/movies?q=${encodeURIComponent(searchQuery)}&page=1`);
-    //await searchMovies({ searchText: searchQuery, page: 1 })
   }
-
 
   const resetSearchText = () => {
     setSearchQuery('')

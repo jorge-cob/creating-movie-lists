@@ -27,7 +27,7 @@ function Movies() {
     if(searchQuery.length > 0) {
       fetchData({ searchText: searchQuery, page: Number(searchPage) })      
     }
-  }, [])
+  }, [searchQuery, searchPage])
 
   return (
     <div className="movie-list-container">

@@ -10,8 +10,8 @@
   display: inline-flex;
   flex-direction: row;
   margin-left: 60px;
-  height: 300px;
   width: 100%;
+  padding: 20px 0px;
 }
 
 .movie-image-wrapper {
@@ -31,7 +31,7 @@
   max-height: 100%;
   height:fit-content;
   border-radius: 5px;
-
+  gap: 20px;
 }
 
 .movie-list-container {
@@ -40,7 +40,15 @@
 
 }
 
-.item-list {
+.movie-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 20px;
+  width: 300px;
+}
+
+.movie-list {
   list-style: none;
   display: flex;
   flex-flow: column wrap;
@@ -101,5 +109,4 @@
   height: 30px;
   position: absolute;
   right: 10px;
-
 }

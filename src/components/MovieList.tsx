@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard"
 const MovieList = ({movies = []} : {movies: Movie[]}) => {
   return (
     <>
-      <ul className='item-list'>
+      <ul className='movie-list'>
         {
           movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         }

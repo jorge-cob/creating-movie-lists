@@ -1,11 +1,19 @@
 import { Movie } from '../types'
+import placeholder from'../assets/no-image.jpg'
+import { Image } from '@nextui-org/react'
 
 const MovieCard = ({movie}: {movie: Movie}) => {
+  const { title, year, poster } = movie
+  const posterImage = poster || placeholder
   return (
     <div className='movie-item-container'>
-      <img className='movie-image' src={movie.poster} alt={movie.title} />
+      <Image 
+        className='movie-image'
+        src={posterImage}
+        alt={title}
+      />
       <p className='movie-title'>
-        {movie.title} - {movie.year}
+        {title} - {year}
       </p>
     </div>
     

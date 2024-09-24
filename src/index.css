@@ -107,18 +107,8 @@
   position: relative;
 }
 
-.top-search-input {
-  height: 30px;
-  font-size: 22px;
-  border: 0;
-  background: #FFF;
-  padding-left: 10px;
-  
-}
 
-.top-search-input:focus {
-  outline: none;
-}
+
 
 .clear-search {
   display: inline-block;

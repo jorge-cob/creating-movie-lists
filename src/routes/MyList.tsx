@@ -3,6 +3,7 @@ import { getMovies } from '../service/movies'
 import { Movie } from '../types'
 import MovieList from '../components/MovieList'
 import {Pagination} from "@nextui-org/pagination"
+import { Input } from '@nextui-org/react'
 
 function MyList() {
   const [searchText, setSearchText] = useState('')
@@ -36,7 +37,11 @@ function MyList() {
       <main>
         <article>
           <form onSubmit={handleSubmit}>
-            <input type="text" value={searchText} onChange={handleSearchChange} />
+            <Input 
+              type="text" 
+              value={searchText} 
+              onChange={handleSearchChange} 
+            />
             <button type="submit">Search</button>
           </form>
           <MovieList movies={movies}  />

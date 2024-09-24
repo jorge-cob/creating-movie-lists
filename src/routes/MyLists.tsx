@@ -1,12 +1,16 @@
-import { useState } from "react";
 import {Button, useDisclosure} from "@nextui-org/react";
 import FormModal from '../components/FormModal'
-import { MovieList } from "../types";
+import { useMovieListsActions } from "../hooks/useMovieListsActions";
+import { useAppSelector } from "../hooks/store";
 
 function MyLists() {
-  const [lists, setLists] = useState<MovieList[]>([]);
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { addNewList } = useMovieListsActions()
+  const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
+  const lists = useAppSelector((state) => state.movieLists)
 
+  const handleNewList = (name: string) => {
+    addNewList(name)
+  }
 
   return (
     <div className="movie-list-container">
@@ -18,7 +22,7 @@ function MyLists() {
           : <h1>You have no lists</h1>}
       </ul>
       <Button onPress={onOpen}>Create new list</Button>
-      <FormModal isOpen={isOpen} onOpenChange={onOpenChange} />
+      <FormModal isOpen={isOpen} onOpenChange={onOpenChange} onAccept={handleNewList} onClose={onClose}/>
     </div>
   )
 }

@@ -1,60 +1,25 @@
-import { useState } from 'react'
-import { getMovies } from '../service/movies'
-import { Movie } from '../types'
-import MovieList from '../components/MovieList'
-import {Pagination} from "@nextui-org/pagination"
+import { useState } from "react";
+import {Button, useDisclosure} from "@nextui-org/react";
+import FormModal from '../components/FormModal'
+import { MovieList } from "../types";
 
 function MyLists() {
-  const [searchText, setSearchText] = useState('')
-  const [movies, setMovies] = useState<Movie[]>([])
-  const [pages, setPages] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [lists, setLists] = useState<MovieList[]>([]);
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value)
-  }
-
-  async function requestMovies({page = 1}) {
-    const {search, totalResults}  = await getMovies({searchText, page});
-    setMovies(search)
-    setPages(Math.ceil(totalResults / 10))
-  }
-  
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    await requestMovies({page: currentPage});
-  }
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    requestMovies({page: page})
-  }
 
   return (
-    <>
-      <main>
-        <article>
-          <form onSubmit={handleSubmit}>
-            <input type="text" value={searchText} onChange={handleSearchChange} />
-            <button type="submit">Search</button>
-          </form>
-          <MovieList movies={movies}  />
-          <div className="flex flex-col gap-5">
-          <p className="text-small text-default-500">Selected Page: {currentPage}</p>
-          <Pagination
-            total={pages}
-            color="primary"
-            page={currentPage}
-            onChange={handlePageChange}
-          />
-          </div>
-        </article>
-      </main>
-      <footer>
-        Footer
-      </footer>
-    </>
+    <div className="movie-list-container">
+      <ul className='movie-list'>
+        {lists.length 
+          ? lists.map((list) => (
+            <li key={list.name}>{list.name}</li>
+          )) 
+          : <h1>You have no lists</h1>}
+      </ul>
+      <Button onPress={onOpen}>Create new list</Button>
+      <FormModal isOpen={isOpen} onOpenChange={onOpenChange} />
+    </div>
   )
 }
 

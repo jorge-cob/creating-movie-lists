@@ -6,7 +6,11 @@ const MovieList = ({movies = [], loading = false} : {movies: Movie[], loading: b
   return (
     <ul className='movie-list'>
       {
-        loading ? <Spinner label="Loading..." color="warning" size='lg' className='loading-spinner' /> : movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+        loading 
+        ? <Spinner label="Loading..." color="warning" size='lg' className='loading-spinner' /> 
+        : movies.map(
+          (movie) => <MovieCard key={movie.id} movie={movie} />
+        )
       }
     </ul>
   )

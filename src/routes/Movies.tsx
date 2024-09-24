@@ -28,8 +28,6 @@ function Movies() {
     }
   }, [searchQuery, searchPage])
 
-  console.log('searchPage', searchPage);
-
   return (
     <div className="movie-list-container">
         <MovieList movies={search} loading={loading} />

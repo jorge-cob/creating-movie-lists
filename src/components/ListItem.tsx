@@ -5,7 +5,7 @@ import { MovieListId } from "../types"
 
 const ListItem = ({text, onPressDelete, listId}: {text: string, onPressDelete: (listId: MovieListId) => void, listId: MovieListId}) => {
   return (
-    <Card>
+    <Card className="w-3/4 ">
       <CardBody>
         {text}
       </CardBody>

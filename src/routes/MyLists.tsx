@@ -1,10 +1,12 @@
-import {Button, useDisclosure} from "@nextui-org/react";
+import {Button, useDisclosure} from "@nextui-org/react"
 import FormModal from '../components/FormModal'
-import { useMovieListsActions } from "../hooks/useMovieListsActions";
-import { useAppSelector } from "../hooks/store";
+import { useMovieListsActions } from "../hooks/useMovieListsActions"
+import { useAppSelector } from "../hooks/store"
+import ListItem from "../components/ListItem"
+import { MovieListId } from "../types"
 
 function MyLists() {
-  const { addNewList } = useMovieListsActions()
+  const { addNewList, removeList } = useMovieListsActions()
   const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
   const lists = useAppSelector((state) => state.movieLists)
 
@@ -12,16 +14,25 @@ function MyLists() {
     addNewList(name)
   }
 
+  const handleRemoveList = (listId: MovieListId) => {
+    removeList(listId)
+  }
+
   return (
     <div className="movie-list-container">
       <ul className='movie-list'>
+      <Button onPress={onOpen}>Create new list</Button>
         {lists.length 
           ? lists.map((list) => (
-            <li key={list.name}>{list.name}</li>
+            <ListItem 
+              key={list.id} 
+              text={list.name} 
+              onPressDelete={handleRemoveList}
+              listId={list.id} 
+            />
           )) 
           : <h1>You have no lists</h1>}
       </ul>
-      <Button onPress={onOpen}>Create new list</Button>
       <FormModal isOpen={isOpen} onOpenChange={onOpenChange} onAccept={handleNewList} onClose={onClose}/>
     </div>
   )

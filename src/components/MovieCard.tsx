@@ -1,4 +1,4 @@
-import { Movie, MovieListId } from '../types'
+import { Movie, MovieId, MovieListId } from '../types'
 import placeholder from'../assets/no-image.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -9,11 +9,15 @@ import { useDisclosure } from '@nextui-org/react'
 const MovieCard = ({movie}: {movie: Movie}) => {
   const { title, year, poster } = movie
   const posterImage = poster || placeholder
-  const { addMovieToList } = useMovieListsActions()
+  const { addMovieToList, removeMovieFromList } = useMovieListsActions()
   const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
 
   const handleAddMovieToList = (listId: MovieListId) => {
     addMovieToList(movie, listId)
+  }
+
+  const handleRemoveMovieFromList = (listId: MovieListId) => {
+    removeMovieFromList(movie.id, listId)
   }
   return (
     <div className='movie-item-container'>
@@ -34,7 +38,7 @@ const MovieCard = ({movie}: {movie: Movie}) => {
           <h2>{year}</h2>
         </span>
       </div>
-      <MovieListsSelectModal isOpen={isOpen} onOpenChange={onOpenChange} onSelect={handleAddMovieToList} onClose={onClose} />
+      <MovieListsSelectModal movieId={movie.id} isOpen={isOpen} onOpenChange={onOpenChange} addMovieToList={handleAddMovieToList} removeMovieFromList={handleRemoveMovieFromList} onClose={onClose} />
     </div>
     
   )

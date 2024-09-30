@@ -35,7 +35,7 @@ export const movieListsSlice = createSlice({
 			const { movieId, listId } = action.payload;
 			return state.forEach((movieList) => {
 				if (movieList.id === listId) {
-					movieList.movies.filter((movie) => movie.id !== movieId)
+					movieList.movies = movieList.movies.filter((movie) => movie.id !== movieId)
 				}
 			})
 		}

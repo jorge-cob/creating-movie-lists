@@ -21,18 +21,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/mylists',
+        path: 'mylists',
         element: <MyLists />,
-        children: [
-          {
-            path: ':id',
-            element: <MyList />,
-          }
-        ]
       },
       {
         path: '/movies',
         element: <Movies />,
+      },
+      {
+        path: '/list/',
+        element: <MyList />,
       }
     ]
   }

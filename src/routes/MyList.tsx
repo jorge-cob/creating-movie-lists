@@ -1,64 +1,22 @@
-import { useState } from 'react'
-import { getMovies } from '../service/movies'
-import { Movie } from '../types'
-import MovieList from '../components/MovieList'
-import {Pagination} from "@nextui-org/pagination"
-import { Input } from '@nextui-org/react'
+import { useSearchParams } from "react-router-dom"
+import { useAppSelector } from "../hooks/store"
+import MovieList from "../components/MovieList"
+
 
 function MyList() {
-  const [searchText, setSearchText] = useState('')
-  const [movies, setMovies] = useState<Movie[]>([])
-  const [pages, setPages] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
-
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value)
-  }
-
-  async function requestMovies({page = 1}) {
-    const {search, totalResults}  = await getMovies({searchText, page});
-    setMovies(search)
-    setPages(Math.ceil(totalResults / 10))
-  }
-  
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    await requestMovies({page: currentPage});
-  }
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    requestMovies({page: page})
-  }
-
+  const [searchParams] = useSearchParams()
+  const idQuery = searchParams.get('id')
+  const lists = useAppSelector((state) => state.movieLists)
+  const list = lists.find((item) => item.id === idQuery)
+  const movies = list ? list.movies : []
   return (
     <>
-      <main>
-        <article>
-          <form onSubmit={handleSubmit}>
-            <Input 
-              type="text" 
-              value={searchText} 
-              onChange={handleSearchChange} 
-            />
-            <button type="submit">Search</button>
-          </form>
-          <MovieList movies={movies}  />
-          <div className="flex flex-col gap-5">
-          <p className="text-small text-default-500">Selected Page: {currentPage}</p>
-          <Pagination
-            total={pages}
-            color="primary"
-            page={currentPage}
-            onChange={handlePageChange}
-          />
-          </div>
-        </article>
-      </main>
-      <footer>
-        Footer
-      </footer>
+     {
+      movies.length < 1 
+      ? <h1>Movie list is empty</h1>
+      : <MovieList movies={movies} loading={false} />
+     }
+      
     </>
   )
 }

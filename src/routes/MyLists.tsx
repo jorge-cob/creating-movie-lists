@@ -1,4 +1,4 @@
-import {Button, useDisclosure} from "@nextui-org/react"
+import { useDisclosure} from "@nextui-org/react"
 import FormModal from '../components/FormModal'
 import { useMovieListsActions } from "../hooks/useMovieListsActions"
 import { useAppSelector } from "../hooks/store"

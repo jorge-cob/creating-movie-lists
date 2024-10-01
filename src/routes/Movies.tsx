@@ -32,12 +32,13 @@ function Movies() {
     <div className="movie-list-container">
         <MovieList movies={search} loading={loading} />
         <div className="flex flex-col gap-5">
-        <Pagination
+        {search.length > 0 && <Pagination
           total={totalPages}
           color="primary"
           page={searchPage}
           onChange={handlePageChange}
         />
+}
         </div>
     </div>
   )

@@ -4,19 +4,19 @@ import { NavbarContent, Navbar, NavbarBrand, Image, NavbarItem } from "@nextui-o
 
 const NavBar = () => {
   return (
-    <Navbar className="bg-blue-500 border-gray-200 dark:bg-gray-900">
-        <NavbarBrand>
-          <Image width="30px" height="30px"   src="../../logo.svg"  alt="fireSpot"/>
-          <p className="font-bold text-inherit pl-10">MisPelis</p>
+    <Navbar maxWidth="full" className="bg-blue-500 border-gray-200 dark:bg-gray-900">
+        <NavbarBrand className="max-w-56 ml-16">
+          <Image width="36px" height="36px"   src="../../logo.svg"  alt="fireSpot"/>
+          <p className="font-bold text-inherit text-3xl text-yellow-400 pl-2">MisPelis</p>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarContent className="ml-16" justify="start">
           <NavbarItem>
             <SearchBar />
           </NavbarItem>
           <NavbarItem>
             <Link 
               to={'/mylists'}
-              className="text-white font-bold hover:text-gray-700 hover:underline"
+              className="text-gray-300 underline-offset-4 underline font-bold hover:text-gray-700 hover:underline"
             >
               My lists
             </Link>
